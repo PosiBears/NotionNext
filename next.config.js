@@ -143,17 +143,17 @@ const nextConfig = {
   },
 
   // 默认将feed重定向至 /public/rss/feed.xml
-  redirects: process.env.EXPORT
-    ? undefined
-    : () => {
-      return [
-        {
-          source: '/feed',
-          destination: '/rss/feed.xml',
-          permanent: true
-        }
-      ]
-    },
+  // redirects: process.env.EXPORT
+  //   ? undefined
+  //   : () => {
+  //     return [
+  //       {
+  //         source: '/feed',
+  //         destination: '/rss/feed.xml',
+  //         permanent: true
+  //        }
+  //      ]
+  //    },
   // 重写url
   rewrites: process.env.EXPORT
     ? undefined
