@@ -88,14 +88,10 @@ const Player = () => {
           position: 'fixed',
           bottom: '20px',
           left: '20px',
-          width: '400px',
-          maxWidth: '92'vw
           zIndex: 99999,
           borderRadius: '16px',
           boxShadow: '0 10px 40px rgba(0, 0, 0, 0.25)',
-          overflow: 'hidden',
-          background: 'rgba(255, 255, 255, 0.98)',
-          border: '1px solid rgba(0, 0, 0, 0.1)'
+          overflow: 'hidden'
         }}
       />
     )}
