@@ -320,7 +320,7 @@ height: 155px !important;
 
 .aplayer .aplayer-lrc {
 position: relative !important;
-max-height: 110px !important;   
+max-height: 100px !important;   
 margin: 8px 0 12px 0 !important;
 padding: 0 18px !important;
 overflow: hidden !important;
@@ -331,8 +331,8 @@ font-size: 15.5px !important;
 
 @media (max-width: 767px) {
 .aplayer {
-width: 75vw !important;
-left: 12.5vw !important; 
+width: 80vw !important;
+left: 10vw !important; 
 bottom: 12px !important;
 height: 130px !important;
 border-radius: 12px !important;
