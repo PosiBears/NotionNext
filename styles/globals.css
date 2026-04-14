@@ -330,19 +330,24 @@ font-size: 15.5px !important;
 
 
 @media (max-width: 767px) {
-.aplayer {
-width: 80vw !important;
-left: 10vw !important; 
-bottom: 15px !important;
-height: 122px !important;
-border-radius: 12px !important;
-}
+    .aplayer {
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 10vw !important; 
+        width: 80vw !important;
+        max-width: 80vw !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+        overflow: hidden !important;
+    }
+    
 
-.aplayer .aplayer-lrc {
-max-height: 65px !important;
-font-size: 14.5px !important;
-padding: 0 14px !important;
-}
+    .aplayer .aplayer-lrc {
+        position: relative !important;
+        max-height: none !important; 
+        margin: 6px 0 8px 0 !important;
+        padding: 0 14px !important;
+    }
 }
 
 
