@@ -346,34 +346,42 @@ font-size: 15.5px !important;
 
     .aplayer .aplayer-lrc {
         position: relative !important;
-        max-height: 52 !important; 
-        margin: 4px 0 5px 0 !important;
+        max-height: 54 !important; 
+        margin: 4px 0 6px 0 !important;
         padding: 0 14px !important;
         overflow: hidden !important;
     }
 
     .aplayer .aplayer-title {
-        font-size: 12px !important;
+        font-size: 14.5px !important;
         line-height: 1.4 !important;
         white-space: normal !important;
         word-break: break-word !important;
-        margin-bottom: 4px !important;
+        text-align: center !important;    
+        margin-bottom: 3px !important;
+        color: inherit !important;
     }
 
-    .aplayer .aplayer-title::after {
-        content: "\A";             
-        white-space: pre; 
+    .aplayer .aplayer-title {
+        position: relative !important;
+    }
+
+    .aplayer .aplayer-title::before {
+        content: attr(title) !important; 
     }
 
     .aplayer .aplayer-author {
-        font-size: 10px !important;
+        display: block !important;
+        font-size: 13px !important;
         line-height: 1.35 !important;
-        opacity: 0.9 !important;
+        text-align: center !important;
+        opacity: 0.85 !important;
         margin-top: 2px !important;
     }
 
     .aplayer .aplayer-info {
-        padding: 8px 14px 6px !important;
+        padding: 8px 14px 8px !important;
+        text-align: center !important; 
     }
 }
 
