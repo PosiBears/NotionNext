@@ -377,10 +377,14 @@ font-size: 15.5px !important;
         white-space: normal !important;
     }
 
+    .aplayer .aplayer-author::before {
+        content: "" !important;   
+    }
+
     .aplayer .aplayer-info {
         padding: 12px 14px 12px !important;
         text-align: center !important; 
-        min-height: 98px !important; 
+        min-height: 99px !important; 
     }
 }
 
