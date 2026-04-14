@@ -332,21 +332,24 @@ font-size: 15.5px !important;
 @media (max-width: 767px) {
     .aplayer {
         position: fixed !important;
-        bottom: 15px !important;
+        bottom: 12px !important;
         left: 10vw !important; 
         width: 80vw !important;
-        max-width: 80vw !important;
+        min-height: 118px !important;
+        max-height: 135px !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
         overflow: hidden !important;
+        background: rgba(255, 255, 255, 0.97) !important;
     }
     
 
     .aplayer .aplayer-lrc {
         position: relative !important;
-        max-height: none !important; 
+        max-height: 62 !important; 
         margin: 6px 0 8px 0 !important;
         padding: 0 14px !important;
+        overflow: hidden !important;
     }
 }
 
