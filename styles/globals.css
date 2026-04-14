@@ -315,13 +315,13 @@ border: 1px solid rgba(0, 0, 0, 0.1) !important;
 @media (min-width: 768px) {
 .aplayer {
 width: 400px !important;
-height: 155px !important;    
+height: 128px !important;    
 }
 
 .aplayer .aplayer-lrc {
 position: relative !important;
-max-height: 100px !important;   
-margin: 8px 0 12px 0 !important;
+max-height: 72px !important;   
+margin: 6px 0 8px 0 !important;
 padding: 0 18px !important;
 overflow: hidden !important;
 font-size: 15.5px !important;
@@ -333,14 +333,14 @@ font-size: 15.5px !important;
 .aplayer {
 width: 80vw !important;
 left: 10vw !important; 
-bottom: 12px !important;
-height: 130px !important;
+bottom: 15px !important;
+height: 122px !important;
 border-radius: 12px !important;
 }
 
 .aplayer .aplayer-lrc {
-max-height: 68px !important;
-font-size: 14px !important;
+max-height: 65px !important;
+font-size: 14.5px !important;
 padding: 0 14px !important;
 }
 }
