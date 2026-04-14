@@ -343,12 +343,12 @@ height: 128px !important;
 
     .aplayer .aplayer-lrc,
     .aplayer .aplayer-lrc * {
-        font-size: 10px !important;   
+        font-size: 9px !important;   
         line-height: 1.2 !important;
     }
 
     .aplayer .aplayer-title {
-        font-size: 8px !important;      
+        font-size: 10px !important;      
         line-height: 1.35 !important;
         white-space: nowrap !important;    
         overflow: hidden !important;
@@ -363,7 +363,7 @@ height: 128px !important;
     }
 
     .aplayer .aplayer-info {
-        padding: 4px 10px 4px !important;
+        padding: 2px 10px 2px !important;
         text-align: center !important; 
     }
 }
