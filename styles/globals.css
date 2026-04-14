@@ -353,24 +353,23 @@ font-size: 15.5px !important;
     }
 
     .aplayer .aplayer-title {
-        font-size: 13px !important;
+        font-size: 11px !important;
         line-height: 1.4 !important;
         text-align: center !important;
         display: block !important;
         margin-bottom: 3px !important;
         white-space: normal !important;
-        padding: 0 8px !important;
+        padding: 0 4px !important;
     }
 
     .aplayer .aplayer-author {
         display: block !important;
-        font-size: 11px !important;
-        line-height: 1.35 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 10px !important;
         text-align: center !important;
-        color: inherit !important;
-        opacity: 0.9 !important;
-        margin-top: 2px !important;
-        white-space: normal !important;
+        margin-top: 3px !important;
+        line-height: 1.4 !important;
     }
 
     .aplayer .aplayer-info {
