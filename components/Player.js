@@ -86,9 +86,10 @@ const Player = () => {
         data-player={player}
         style={{
           position: 'fixed',
-          bottom: '30px',
-          left: '30px',
-          width: '380px',
+          bottom: '20px',
+          left: '20px',
+          width: '400px',
+          maxWidth: '92'vw
           zIndex: 99999,
           borderRadius: '16px',
           boxShadow: '0 10px 40px rgba(0, 0, 0, 0.25)',
