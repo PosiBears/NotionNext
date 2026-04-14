@@ -348,38 +348,35 @@ font-size: 15.5px !important;
         position: relative !important;
         max-height: 50 !important; 
         margin: 4px 0 5px 0 !important;
-        padding: 0 14px !important;
+        padding: 0 8px !important;
         overflow: hidden !important;
     }
 
     .aplayer .aplayer-title {
-        font-size: 12px !important;
-        line-height: 1.45 !important;
-        white-space: normal !important;
-        word-break: break-word !important;
-        text-align: center !important;    
-        margin: 0 0 4px 0 !important;
-    }
-
-    .aplayer .aplayer-title {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        text-align: center !important;
         display: block !important;
-    }
-
-    .aplayer .aplayer-title::before {
-        content: attr(title) !important;  
+        margin-bottom: 3px !important;
+        white-space: normal !important;
+        padding: 0 8px !important;
     }
 
     .aplayer .aplayer-author {
         display: block !important;
-        font-size: 10px !important;
+        font-size: 11px !important;
+        line-height: 1.35 !important;
         text-align: center !important;
+        color: inherit !important;
         opacity: 0.9 !important;
         margin-top: 2px !important;
+        white-space: normal !important;
     }
 
     .aplayer .aplayer-info {
         padding: 10px 14px 8px !important;
         text-align: center !important; 
+        min-height: 54px !important;
     }
 }
 
