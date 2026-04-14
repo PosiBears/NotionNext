@@ -335,8 +335,8 @@ font-size: 15.5px !important;
         bottom: 12px !important;
         left: 10vw !important; 
         width: 80vw !important;
-        min-height: 118px !important;
-        max-height: 135px !important;
+        max-width: 80vw !important;
+        z-index: 99999 !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
         overflow: hidden !important;
@@ -346,8 +346,8 @@ font-size: 15.5px !important;
 
     .aplayer .aplayer-lrc {
         position: relative !important;
-        max-height: 62 !important; 
-        margin: 6px 0 8px 0 !important;
+        max-height: 58 !important; 
+        margin: 5px 0 6px 0 !important;
         padding: 0 14px !important;
         overflow: hidden !important;
     }
@@ -357,14 +357,4 @@ font-size: 15.5px !important;
 .aplayer .aplayer-lrc:before,
 .aplayer .aplayer-lrc:after {
 display: none !important;
-}
-
-body, #__next, #theme-hexo {
-    padding-bottom: 160px !important;   /* 移动端安全距离 */
-}
-
-@media (max-width: 767px) {
-    body, #__next, #theme-hexo {
-        padding-bottom: 170px !important;
-    }
 }
