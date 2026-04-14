@@ -305,14 +305,12 @@ img {
         position: fixed !important;
         bottom: 25px !important;
         left: 25px !important;
-        width: auto !important;
         max-width: 460px !important;     
         min-width: 380px !important;    
         border-radius: 16px !important;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22) !important;
         overflow: hidden !important;
         background: rgba(255, 255, 255, 0.97) !important;
-        border: 1px solid rgba(0, 0, 0, 0.08) !important;
     }
 
 
@@ -322,7 +320,6 @@ img {
         bottom: 12px !important;
         left: 8.5vw !important; 
         width: 80vw !important;
-        max-width: 80vw !important;
         z-index: 99999 !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
