@@ -306,16 +306,14 @@ img {
         bottom: 25px !important;
         left: 25px !important;
         width: auto !important;
-        max-width: 460px !important;
-        min-width: 360px !important;
-        min-height: 130px !important;    
+        max-width: 460px !important;     
+        min-width: 380px !important;    
         border-radius: 16px !important;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22) !important;
         overflow: hidden !important;
         background: rgba(255, 255, 255, 0.97) !important;
         border: 1px solid rgba(0, 0, 0, 0.08) !important;
     }
-
 
 
 @media (max-width: 767px) {
