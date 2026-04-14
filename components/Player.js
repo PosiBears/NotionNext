@@ -42,7 +42,7 @@ const Player = () => {
       setPlayer(
         new window.APlayer({
           container: ref.current,
-          fixed: false,
+          fixed: true,
           lrcType: lrcType,
           autoplay: autoPlay,
           order: order,
@@ -64,11 +64,11 @@ const Player = () => {
       <link
         rel='stylesheet'
         type='text/css'
-        href='https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css'
+        href='https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css'
       />
       {meting ? (
         <meting-js
-          fixed='false'
+          fixed='true'
           type='playlist'
           preload='auto'
           api={siteConfig(
