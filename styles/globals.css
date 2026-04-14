@@ -345,17 +345,21 @@ font-size: 15.5px !important;
     
 
     .aplayer .aplayer-lrc {
-        font-size: 10px !important;
-        position: relative !important;
-        max-height: 50 !important; 
+        max-height: 52 !important; 
         margin: 4px 0 6px 0 !important;
         padding: 0 8px !important;
         overflow: hidden !important;
     }
 
+    .aplayer .aplayer-lrc,
+    .aplayer .aplayer-lrc * {
+        font-size: 10px !important;   
+        line-height: 1.2 !important;
+    }
+
     .aplayer .aplayer-title {
         font-size: 11px !important;
-        line-height: 1.4 !important;
+        line-height: 1.3 !important;
         text-align: center !important;
         margin-bottom: 4px !important;
         display: block !important;
@@ -364,18 +368,20 @@ font-size: 15.5px !important;
 
     .aplayer .aplayer-author {
         display: block !important;
-        white-space: normal !important;
-        opacity: 1 !important;
+        visibility: visible !important;
         font-size: 10px !important;
+        line-height: 1.2 !important;
         text-align: center !important;
-        margin-top: 2px !important;
-        line-height: 1.35 !important;
+        opacity: 0.92 !important;
+        margin-top: 3px !important;
+        white-space: normal !important;
     }
 
     .aplayer .aplayer-info {
-        padding: 10px 14px 10px !important;
+        padding: 12px 14px 12px !important;
         text-align: center !important; 
-        min-height: 62px !important;
+        min-height: 78px !important; 
+        max-height: 82px !important;
     }
 }
 
