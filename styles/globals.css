@@ -317,15 +317,6 @@ border: 1px solid rgba(0, 0, 0, 0.1) !important;
 width: 400px !important;
 height: 128px !important;    
 }
-
-.aplayer .aplayer-lrc {
-position: relative !important;
-max-height: 72px !important;   
-margin: 6px 0 8px 0 !important;
-padding: 0 18px !important;
-overflow: hidden !important;
-font-size: 15.5px !important;
-}
 }
 
 
@@ -357,7 +348,7 @@ font-size: 15.5px !important;
     }
 
     .aplayer .aplayer-title {
-        font-size: 11px !important;      
+        font-size: 8px !important;      
         line-height: 1.35 !important;
         white-space: nowrap !important;    
         overflow: hidden !important;
@@ -372,7 +363,7 @@ font-size: 15.5px !important;
     }
 
     .aplayer .aplayer-info {
-        padding: 8px 10px 8px !important;
+        padding: 4px 10px 4px !important;
         text-align: center !important; 
     }
 }
