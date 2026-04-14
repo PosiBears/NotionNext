@@ -345,7 +345,7 @@ font-size: 15.5px !important;
     
 
     .aplayer .aplayer-lrc {
-        max-height: 52 !important; 
+        max-height: 32 !important; 
         margin: 4px 0 6px 0 !important;
         padding: 0 8px !important;
         overflow: hidden !important;
