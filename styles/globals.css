@@ -380,8 +380,7 @@ font-size: 15.5px !important;
     .aplayer .aplayer-info {
         padding: 12px 14px 12px !important;
         text-align: center !important; 
-        min-height: 78px !important; 
-        max-height: 82px !important;
+        min-height: 98px !important; 
     }
 }
 
