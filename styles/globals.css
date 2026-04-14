@@ -333,7 +333,7 @@ font-size: 15.5px !important;
     .aplayer {
         position: fixed !important;
         bottom: 12px !important;
-        left: 10vw !important; 
+        left: 8vw !important; 
         width: 80vw !important;
         max-width: 80vw !important;
         z-index: 99999 !important;
@@ -372,6 +372,7 @@ font-size: 15.5px !important;
         padding: 0 14px 6px !important;
         min-height: auto !important;
     }
+}
 
 .aplayer .aplayer-lrc:before,
 .aplayer .aplayer-lrc:after {
