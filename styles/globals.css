@@ -305,10 +305,10 @@ img {
         position: fixed !important;
         bottom: 25px !important;
         left: 25px !important;
-        width: auto !important;           /* 宽度自适应 */
-        max-width: 460px !important;      /* 最大不要超过460px，避免太宽 */
-        min-width: 360px !important;      /* 最小宽度，避免太窄 */
-        height: 132px !important;         /* 推荐高度，可微调 */
+        width: auto !important;
+        max-width: 460px !important;
+        min-width: 360px !important;
+        min-height: 130px !important;    
         border-radius: 16px !important;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22) !important;
         overflow: hidden !important;
