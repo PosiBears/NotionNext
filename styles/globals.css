@@ -298,3 +298,59 @@ img {
   @keyframes l1 {
   0% {background-position: right}
 }
+
+/* === NotionNext Hexo APlayer 最终优化版：桌面高度 + 移动端适配 === /
+
+/ 基础定位和通用样式 /
+.aplayer {
+position: fixed !important;
+bottom: 20px !important;
+left: 20px !important;
+z-index: 99999 !important;
+border-radius: 16px !important;
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25) !important;
+overflow: hidden !important;
+background: rgba(255, 255, 255, 0.97) !important;
+border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/ 桌面端（宽度 ≥ 768px）：增加高度，让歌词显示 2-3 行 /
+@media (min-width: 768px) {
+.aplayer {
+width: 400px !important;
+height: 155px !important;        / 重点：增加总高度 /
+}
+
+.aplayer .aplayer-lrc {
+position: relative !important;
+max-height: 110px !important;     / 歌词区域更高，可显示更多行 /
+margin: 8px 0 12px 0 !important;
+padding: 0 18px !important;
+overflow: hidden !important;
+font-size: 15.5px !important;
+}
+}
+
+/* 移动端适配 - 75vw /
+@media (max-width: 767px) {
+.aplayer {
+width: 75vw !important;
+left: 12.5vw !important;     / 让它居中一点：(100% - 75%)/2 = 12.5% */
+bottom: 12px !important;
+height: 130px !important;
+border-radius: 12px !important;
+}
+
+.aplayer .aplayer-lrc {
+max-height: 68px !important;
+font-size: 14px !important;
+padding: 0 14px !important;
+}
+}
+
+
+/ 清除残留渐变遮罩 */
+.aplayer .aplayer-lrc:before,
+.aplayer .aplayer-lrc:after {
+display: none !important;
+}
