@@ -358,3 +358,13 @@ font-size: 15.5px !important;
 .aplayer .aplayer-lrc:after {
 display: none !important;
 }
+
+body, #__next, #theme-hexo {
+    padding-bottom: 160px !important;   /* 移动端安全距离 */
+}
+
+@media (max-width: 767px) {
+    body, #__next, #theme-hexo {
+        padding-bottom: 170px !important;
+    }
+}
