@@ -9,7 +9,7 @@ import BLOG from './blog.config'
  */
 export const config = {
   // 这里设置白名单，防止静态资源被拦截
-  matcher: ['/((?!.*\\..*|_next|/sign-in|/auth).*)', '/', '/(api|trpc)(.*)','/music/:path*']
+  matcher: ['/((?!.*\\..*|_next|/sign-in|/auth).*)', '/', '/(api|trpc)(.*)','/music/:path*','/images/:path*']
 }
 
 // 限制登录访问的路由
@@ -33,7 +33,8 @@ function musicHotlinkProtection(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   // 只对 /music 目录下的音频文件进行保护
-  if (pathname.startsWith('/music/') && 
+  if (
+    (pathname.startsWith('/music/') || pathname.startsWith('/audio/')) &&
       /\.(m4a|lrc|avif|jpg|webp)$/i.test(pathname)) {
     
     const referer = req.headers.get('referer') || '';
