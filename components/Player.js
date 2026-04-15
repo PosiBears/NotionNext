@@ -39,67 +39,69 @@ const Player = () => {
     }
 
     if (!meting && window.APlayer) {
-      const ap = new window.APlayer({
-        container: ref.current,
-        fixed: false,
-        lrcType: lrcType,
-        autoplay: autoPlay,
-        order: order,
-        audio: audio,
-        theme: '#ff4d4f'
-      });
+  const ap = new window.APlayer({
+    container: ref.current,
+    fixed: false,
+    lrcType: lrcType,
+    autoplay: autoPlay,
+    order: order,
+    audio: audio,
+    theme: '#ff4d4f'
+  });
 
-      // 添加隐藏按钮功能
+  // 添加隐藏按钮（安全版）
+  setTimeout(() => {
+    const playerContainer = ref.current;
+    const playerEl = playerContainer?.querySelector('.aplayer');
+
+    if (!playerEl) return;                     // 防止找不到元素
+    if (playerEl.querySelector('.hide-btn')) return; // 防止重复添加
+
+    const hideBtn = document.createElement('div');
+    hideBtn.className = 'hide-btn';
+    hideBtn.innerHTML = '✕';
+    hideBtn.style.cssText = `
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 26px;
+      height: 26px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.2s;
+      user-select: none;
+    `;
+
+    // 悬停效果
+    hideBtn.onmouseover = () => { hideBtn.style.background = 'rgba(220, 0, 0, 0.9)'; };
+    hideBtn.onmouseout = () => { hideBtn.style.background = 'rgba(0,0,0,0.7)'; };
+
+    // 点击隐藏（关键保护）
+    hideBtn.onclick = (e) => {
+      e.stopImmediatePropagation();
+      playerEl.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      playerEl.style.opacity = '0';
+      playerEl.style.transform = 'scale(0.9)';
+
       setTimeout(() => {
-        const playerContainer = ref.current;
-        const playerEl = playerContainer.querySelector('.aplayer');
+        playerEl.style.display = 'none';
+      }, 400);
+    };
 
-        if (playerEl) {
-          // 创建隐藏按钮
-          const hideBtn = document.createElement('div');
-          hideBtn.innerHTML = '✕';
-          hideBtn.style.cssText = `
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            width: 26px;
-            height: 26px;
-            background: rgba(0, 0, 0, 0.65);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.2s ease;
-            user-select: none;
-          `;
+    playerEl.style.position = 'relative';
+    playerEl.appendChild(hideBtn);
 
-          // 鼠标悬停效果
-          hideBtn.onmouseover = () => hideBtn.style.background = 'rgba(0, 0, 0, 0.85)';
-          hideBtn.onmouseout = () => hideBtn.style.background = 'rgba(0, 0, 0, 0.65)';
-
-          // 点击隐藏播放器
-          hideBtn.onclick = (e) => {
-            e.stopPropagation();
-            playerEl.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-            playerEl.style.opacity = '0';
-            playerEl.style.transform = 'scale(0.85)';
-
-            setTimeout(() => {
-              playerEl.style.display = 'none';
-            }, 350);
-          };
-
-          // 把按钮添加到播放器
-          playerEl.style.position = 'relative';
-          playerEl.appendChild(hideBtn);
-        }
-       }, 1000); // 延迟1秒，确保APlayer完全渲染完成
-    }
+    console.log('✅ APlayer 隐藏按钮已添加'); // 调试用，部署后可删除
+  }, 1200); // 延迟1.2秒，确保播放器完全渲染
+}
 
   useEffect(() => {
     initMusicPlayer()
