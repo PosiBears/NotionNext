@@ -303,7 +303,7 @@ img {
 @media (max-width: 767px) {
     .aplayer {
         position: fixed !important;
-        bottom: 22px !important;
+        bottom: 16px !important;
         left: 8.5vw !important; 
         width: 80vw !important;
         z-index: 99999 !important;
@@ -344,10 +344,6 @@ img {
     .aplayer .aplayer-info {
         padding: 2px 10px 2px !important;
         text-align: center !important; 
-    }
-
-    body, #__next, #theme-hexo, .visible {
-        padding-bottom: 140px !important; 
     }
 }
 
