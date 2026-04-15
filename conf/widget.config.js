@@ -29,7 +29,7 @@ module.exports = {
   MUSIC_PLAYER_VISIBLE: process.env.NEXT_PUBLIC_MUSIC_PLAYER_VISIBLE || true, // 是否在左下角显示播放和切换，如果使用播放器，打开自动播放再隐藏，就会以类似背景音乐的方式播放，无法取消和暂停
   MUSIC_PLAYER_AUTO_PLAY:
     process.env.NEXT_PUBLIC_MUSIC_PLAYER_AUTO_PLAY || false, // 是否自动播放，不过自动播放时常不生效（移动设备不支持自动播放）
-  MUSIC_PLAYER_LRC_TYPE: process.env.NEXT_PUBLIC_MUSIC_PLAYER_LRC_TYPE || '1', // 歌词显示类型，可选值： 3 | 1 | 0（0：禁用 lrc 歌词，1：lrc 格式的字符串，3：lrc 文件 url）（前提是有配置歌词路径，对 meting 无效）
+  MUSIC_PLAYER_LRC_TYPE: process.env.NEXT_PUBLIC_MUSIC_PLAYER_LRC_TYPE || '3', // 歌词显示类型，可选值： 3 | 1 | 0（0：禁用 lrc 歌词，1：lrc 格式的字符串，3：lrc 文件 url）（前提是有配置歌词路径，对 meting 无效）
   MUSIC_PLAYER_CDN_URL:
     process.env.NEXT_PUBLIC_MUSIC_PLAYER_CDN_URL ||
     'https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js',
@@ -41,30 +41,7 @@ module.exports = {
       artist: 'Kendall Kelly',
       url: '/music/d.m4a',
       cover: '/music/cover.avif',
-      lrc: `[00:00.000] Do you know how sexy you are
-[00:05.947] Do you know how wild you make me
-[00:12.581] And it's not your body, your car
-[00:19.121] It's the way you give and take me
-[00:25.150] I was just a lonely soul
-[00:29.081] Looking for someone to free me from this stormy weather
-[00:37.938] And now it's always sun and summer together
-[00:44.973] Do you know how dirty you are
-[00:50.921] From the earth you came to love me
-[00:57.603] And you're so much brighter than stars
-[01:03.668] But you're here with me and not above me
-[01:10.206] I was just a lonely boy
-[01:13.881] Looking for someone to free me from this dark forever
-[01:22.775] And now it's always sun and summer together
-[01:29.687] Do you know how sexy you are
-[01:53.553] Do you know how hopeless I am
-[01:59.843] hope left me when I met you
-[02:06.257] 'Cause I don't need to wish or pretend
-[02:12.979] to find someone to help me get through
-[02:18.954] I was just a lonely boy
-[02:22.499] Looking for someone to free me from this dark forever
-[02:31.782] And now it's always sun and summer together
-[02:38.518] Do you know how sexy you are...
-[02:59.431] Do you know how sexy you are`
+      lrc: '/music/d.lrc'
     }
   ],
 //   MUSIC_PLAYER_METING: process.env.NEXT_PUBLIC_MUSIC_PLAYER_METING || false, // 是否要开启 MetingJS，从平台获取歌单。会覆盖自定义的 MUSIC_PLAYER_AUDIO_LIST，更多配置信息：https://github.com/metowolf/MetingJS
