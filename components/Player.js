@@ -1,78 +1,75 @@
-import { useEffect } from 'react'
 import { siteConfig } from '@/lib/config'
+import { loadExternalResource } from '@/lib/utils'
+import { useEffect, useRef } from 'react'
 
-const QPlayer2 = () => {
-  const musicEnable = siteConfig('MUSIC_PLAYER')
+/**
+ * QPlayer2 音乐播放器
+ */
+const Player = () => {
+  const ref = useRef(null)
 
-  useEffect(() => {
-    if (!musicEnable) return
+  const musicPlayerEnable = siteConfig('MUSIC_PLAYER')
+  const playerVisible = JSON.parse(siteConfig('MUSIC_PLAYER_VISIBLE', 'true'))
+  const audio = siteConfig('MUSIC_PLAYER_AUDIO_LIST')
 
-    const loadjQuery = () => new Promise((resolve) => {
-      if (window.jQuery) return resolve(window.jQuery)
-      const s = document.createElement('script')
-      s.src = 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js'
-      s.onload = () => resolve(window.jQuery)
-      document.head.appendChild(s)
-    })
+  const initMusicPlayer = async () => {
+    if (typeof window === 'undefined') return
+    if (!musicPlayerEnable) return
 
-    const initQPlayer = async () => {
-      await loadjQuery()
-
-      // 加载 CSS
-      if (!document.getElementById('qplayer-css')) {
-        const link = document.createElement('link')
-        link.id = 'qplayer-css'
-        link.rel = 'stylesheet'
-        link.href = '/css/QPlayer.css'
-        document.head.appendChild(link)
+    try {
+      // 加载 jQuery
+      if (!window.jQuery) {
+        await loadExternalResource(
+          'https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js',
+          'js'
+        )
       }
 
       // 加载 QPlayer2 JS
-      const script = document.createElement('script')
-      script.src = '/js/QPlayer.js'
-      script.onload = () => {
-        console.log('✅ QPlayer2 JS 加载成功')
+      await loadExternalResource('/js/QPlayer2.min.js', 'js')
 
-        // 使用更长的延迟 + 多次尝试，确保 QPlayer 内部初始化完成
-        const setConfig = () => {
-          window.QPlayer = {
-            list: [
-              {
-                name: "Do You Know How Sexy You Are",
-                artist: "Kendall Kelly",
-                audio: "https://p.fileman.tk/d/player/d.m4a?sign=51rcPNTxlw96FaRzxuyKt-Gi2eQdN8dDIJHkkC2Pz8w=:0",        // ← 必须是真实直链
-                cover: "https://stor.picx.cx/images/2026/04/14/cux1oh.avif",
-                lrc: "https://你的双语歌词.lrc 直链"
-              }
-            ],
-            isAutoplay: false,
-            isRotate: true,
-            volume: 0.7
-          }
+      // 加载 QPlayer2 CSS
+      await loadExternalResource('/css/QPlayer2.min.css', 'css')
 
-          console.log('✅ 歌曲列表已设置，数量：', window.QPlayer.list.length)
+      // 等待 DOM
+      if (!ref.current) return
 
-          // 尝试初始化
-          if (typeof window.QPlayer.init === 'function') {
-            window.QPlayer.init()
-            console.log('✅ QPlayer2 已手动初始化')
-          }
-        }
+      // 转换 APlayer 格式 → QPlayer2 格式
+      const playlist = (audio || []).map(item => ({
+        title: item.name || item.title || '',
+        artist: item.artist || '',
+        src: item.url || item.src || '',
+        pic: item.cover || item.pic || ''
+      }))
 
-        // 多次尝试设置配置
-        setTimeout(setConfig, 600)
-        setTimeout(setConfig, 1200)
-        setTimeout(setConfig, 2000)
+      if (window.QPlayer) {
+        window.QPlayer.init({
+          selector: ref.current,
+          playlist: playlist
+        })
       }
-
-      document.head.appendChild(script)
+    } catch (error) {
+      console.error('QPlayer2 加载失败', error)
     }
+  }
 
-    initQPlayer()
+  useEffect(() => {
+    initMusicPlayer()
+  }, [])
 
-  }, [musicEnable])
-
-  return null
+  return (
+    <div className={playerVisible ? 'visible' : 'invisible'}>
+      <div
+        ref={ref}
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '20px',
+          zIndex: 99999
+        }}
+      />
+    </div>
+  )
 }
 
-export default QPlayer2
+export default Player
