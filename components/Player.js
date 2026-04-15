@@ -3,21 +3,21 @@ import { loadExternalResource } from '@/lib/utils'
 import { useEffect, useRef } from 'react'
 
 /**
- * QPlayer2 音乐播放器
+ * QPlayer2 音乐播放器（稳定版）
  */
 const Player = () => {
   const ref = useRef(null)
 
   const musicPlayerEnable = siteConfig('MUSIC_PLAYER')
   const playerVisible = JSON.parse(siteConfig('MUSIC_PLAYER_VISIBLE', 'true'))
-  const audio = siteConfig('MUSIC_PLAYER_AUDIO_LIST')
 
   const initMusicPlayer = async () => {
     if (typeof window === 'undefined') return
     if (!musicPlayerEnable) return
+    if (!ref.current) return
 
     try {
-      // 加载 jQuery
+      // 1. 加载 jQuery
       if (!window.jQuery) {
         await loadExternalResource(
           'https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js',
@@ -25,31 +25,52 @@ const Player = () => {
         )
       }
 
-      // 加载 QPlayer2 JS
+      // 2. 加载 QPlayer2（⚠️如果 CDN 失效，建议你本地化）
       await loadExternalResource('/js/QPlayer.js', 'js')
 
-      // 加载 QPlayer2 CSS
       await loadExternalResource('/css/QPlayer.css', 'css')
 
-      // 等待 DOM
-      if (!ref.current) return
+      // 3. 读取歌单（关键修复点）
+      let audio = siteConfig('MUSIC_PLAYER_AUDIO_LIST')
 
-      // 转换 APlayer 格式 → QPlayer2 格式
-      const playlist = (audio || []).map(item => ({
-        title: item.name || item.title || '',
-        artist: item.artist || '',
-        src: item.url || item.src || '',
-        pic: item.cover || item.pic || ''
-      }))
+      try {
+        if (typeof audio === 'string') {
+          audio = JSON.parse(audio)
+        }
+      } catch (e) {
+        console.error('歌单解析失败:', e)
+        audio = []
+      }
 
+      if (!Array.isArray(audio)) audio = []
+
+      // 4. 转换格式 + 过滤无效数据
+      const playlist = audio
+        .map(item => ({
+          title: item.name || item.title || '',
+          artist: item.artist || '',
+          src: item.url || item.src || '',
+          pic: item.cover || item.pic || '',
+          lrc: item.lrc || ''
+        }))
+        .filter(item => item.src)
+
+      console.log('QPlayer playlist:', playlist)
+
+      if (!playlist.length) {
+        console.warn('QPlayer2：歌单为空，已阻止初始化')
+        return
+      }
+
+      // 5. 初始化播放器
       if (window.QPlayer) {
         window.QPlayer.init({
           selector: ref.current,
-          playlist: playlist
+          playlist
         })
       }
-    } catch (error) {
-      console.error('QPlayer2 加载失败', error)
+    } catch (err) {
+      console.error('QPlayer2 初始化失败:', err)
     }
   }
 
