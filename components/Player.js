@@ -27,30 +27,38 @@ const QPlayer2 = () => {
         document.head.appendChild(link)
       }
 
-      // 加载 QPlayer2 主 JS
+      // 加载 QPlayer2 JS
       const script = document.createElement('script')
       script.src = '/js/QPlayer.js'
       script.onload = () => {
         console.log('✅ QPlayer2 JS 加载成功')
 
-        // 配置歌曲列表（必须在 JS 加载完成后设置）
-        window.QPlayer = {
-          list: [
-            {
-              name: "Do You Know How Sexy You Are",
-              artist: "Kendall Kelly",
-              audio: "https://p.fileman.tk/d/player/d.m4a?sign=51rcPNTxlw96FaRzxuyKt-Gi2eQdN8dDIJHkkC2Pz8w=:0",        // ← 必须改成真实直链！
-              cover: "https://stor.picx.cx/images/2026/04/14/cux1oh.avif",    // 可选
-              lrc: "https://p.fileman.tk/d/player/d1.lrc?sign=KRhaiq6NlfCw_qmcceSMScn562tvUa6djITGrkqlm6c=:0"       // 双语歌词推荐
-            }
-            // 可以继续添加更多歌曲
-          ],
-          isAutoplay: false,
-          isRotate: true,
-          volume: 0.7
-        }
+        // 配置歌曲列表 - 使用 setTimeout 确保在 QPlayer 内部初始化之后设置
+        setTimeout(() => {
+          window.QPlayer = {
+            list: [
+              {
+                name: "Do You Know How Sexy You Are",
+                artist: "Kendall Kelly",
+                audio: "https://p.fileman.tk/d/player/d.m4a?sign=51rcPNTxlw96FaRzxuyKt-Gi2eQdN8dDIJHkkC2Pz8w=:0",        // ← 改成你的真实直链
+                cover: "https://stor.picx.cx/images/2026/04/14/cux1oh.avif",
+                lrc: "https://p.fileman.tk/d/player/d1.lrc?sign=KRhaiq6NlfCw_qmcceSMScn562tvUa6djITGrkqlm6c=:0"
+              }
+              // 可以继续添加更多歌曲
+            ],
+            isAutoplay: false,
+            isRotate: true,
+            volume: 0.7
+          }
 
-        console.log('✅ 配置已设置，等待 QPlayer 自动初始化...')
+          console.log('✅ 歌曲列表已设置，数量：', window.QPlayer.list.length)
+
+          // 尝试初始化
+          if (typeof window.QPlayer.init === 'function') {
+            window.QPlayer.init()
+            console.log('✅ QPlayer2 初始化完成')
+          }
+        }, 800) // 延迟800ms，确保 QPlayer.js 内部逻辑执行完
       }
 
       document.head.appendChild(script)
