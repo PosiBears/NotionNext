@@ -1,102 +1,78 @@
+import { useEffect } from 'react'
 import { siteConfig } from '@/lib/config'
-import { loadExternalResource } from '@/lib/utils'
-import { useEffect, useRef, useState } from 'react'
 
-/**
- * 音乐播放器
- * @returns
- */
-const Player = () => {
-  const [player, setPlayer] = useState()
-  const ref = useRef(null)
-  const lrcType = JSON.parse(siteConfig('MUSIC_PLAYER_LRC_TYPE'))
-  const playerVisible = JSON.parse(siteConfig('MUSIC_PLAYER_VISIBLE'))
-  const autoPlay = JSON.parse(siteConfig('MUSIC_PLAYER_AUTO_PLAY'))
-  const meting = JSON.parse(siteConfig('MUSIC_PLAYER_METING'))
-  const order = siteConfig('MUSIC_PLAYER_ORDER')
-  const audio = siteConfig('MUSIC_PLAYER_AUDIO_LIST')
-
+const QPlayer = () => {
   const musicPlayerEnable = siteConfig('MUSIC_PLAYER')
-  const musicPlayerCDN = siteConfig('MUSIC_PLAYER_CDN_URL')
-  const musicMetingEnable = siteConfig('MUSIC_PLAYER_METING')
-  const musicMetingCDNUrl = siteConfig(
-    'MUSIC_PLAYER_METING_CDN_URL',
-    'https://cdnjs.cloudflare.com/ajax/libs/meting/2.0.1/Meting.min.js'
-  )
-
-  const initMusicPlayer = async () => {
-    if (!musicPlayerEnable) {
-      return
-    }
-    try {
-      await loadExternalResource(musicPlayerCDN, 'js')
-    } catch (error) {
-      console.error('音乐组件异常', error)
-    }
-
-    if (musicMetingEnable) {
-      await loadExternalResource(musicMetingCDNUrl, 'js')
-    }
-
-    if (!meting && window.APlayer) {
-      setPlayer(
-        new window.APlayer({
-          container: ref.current,
-          fixed: false,
-          lrcType: lrcType,
-          autoplay: autoPlay,
-          order: order,
-          audio: audio
-        })
-      )
-    }
-  }
 
   useEffect(() => {
-    initMusicPlayer()
-    return () => {
-      setPlayer(undefined)
-    }
-  }, [])
+    if (!musicPlayerEnable) return
 
-  return (
-    <div className={playerVisible ? 'visible' : 'invisible'}>
-      <link
-        rel='stylesheet'
-        type='text/css'
-        href='https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css'
-      />
-      {meting ? (
-        <meting-js
-          fixed='true'
-          type='playlist'
-          preload='auto'
-          api={siteConfig(
-            'MUSIC_PLAYER_METING_API',
-            'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r'
-          )}
-          autoplay={autoPlay}
-          order={siteConfig('MUSIC_PLAYER_ORDER')}
-          server={siteConfig('MUSIC_PLAYER_METING_SERVER')}
-          id={siteConfig('MUSIC_PLAYER_METING_ID')}
-        />
-      ) : (
-        <div 
-        ref={ref} 
-        data-player={player}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          left: '20px',
-          zIndex: 99999,
-          borderRadius: '16px',
-          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.25)',
-          overflow: 'hidden'
-        }}
-      />
-    )}
-  </div>
-  )
+    // 动态加载 jQuery（QPlayer2 依赖）
+    const loadjQuery = () => {
+      return new Promise((resolve) => {
+        if (window.jQuery) {
+          resolve(window.jQuery)
+          return
+        }
+        const script = document.createElement('script')
+        script.src = 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js'
+        script.onload = () => resolve(window.jQuery)
+        document.body.appendChild(script)
+      })
+    }
+
+    // 加载 QPlayer2
+    const initQPlayer = async () => {
+      await loadjQuery()
+
+      // 加载 CSS
+      if (!document.getElementById('qplayer-css')) {
+        const link = document.createElement('link')
+        link.id = 'qplayer-css'
+        link.rel = 'stylesheet'
+        link.href = '/css/QPlayer.css'   // 或你放的路径
+        document.head.appendChild(link)
+      }
+
+      // 加载 JS
+      const script = document.createElement('script')
+      script.src = '/js/QPlayer.js'     // 或你放的路径
+      script.onload = () => {
+        // 配置播放列表（按照你的需求修改）
+        window.QPlayer = {
+          list: [
+            {
+              name: 'Do You Know How Sexy You Are',
+              artist: 'Kendall Kelly',
+              audio: 'https://p.fileman.tk/d/player/d.m4a?sign=51rcPNTxlw96FaRzxuyKt-Gi2eQdN8dDIJHkkC2Pz8w=:0',
+              cover: 'https://stor.picx.cx/images/2026/04/14/cux1oh.avif',
+              lrc: 'https://p.fileman.tk/d/player/d1.lrc?sign=KRhaiq6NlfCw_qmcceSMScn562tvUa6djITGrkqlm6c=:0'   // 支持 .lrc 文件或字符串
+            },
+            // 可以继续添加更多歌曲
+          ],
+          // 其他可选配置
+          isRotate: true,
+          isShuffle: false,
+          isAutoplay: false
+        }
+
+        // 初始化
+        if (typeof window.QPlayer.init === 'function') {
+          window.QPlayer.init()
+        }
+      }
+      document.body.appendChild(script)
+    }
+
+    initQPlayer()
+
+    // 清理（可选）
+    return () => {
+      // 如果需要销毁 QPlayer，可以在这里处理
+    }
+  }, [musicPlayerEnable])
+
+  return null   // QPlayer2 会自己创建 DOM，不需要返回组件
 }
 
-export default Player
+export default QPlayer
