@@ -41,53 +41,7 @@ module.exports = {
       artist: 'Kendall Kelly',
       url: '/music/d.m4a',
       cover: '/music/cover.avif',
-      lrc: `[00:00.000] Do you know how sexy you are
-
-[00:06.863] Do you know how wild you make me
-
-[00:13.232] And it's not your body, your car
-
-[00:19.649] It's the way you give and take me
-
-[00:25.576] I was just a lonely soul
-
-[00:29.286] Looking for someone to free me from this stormy weather
-
-[00:38.671] And now it's always sun and summer together
-
-[00:45.249] Do you know how dirty you are
-
-[00:51.664] From the earth you came to love me
-
-[00:58.001] And you're so much brighter than stars
-
-[01:04.379] But you're here with me and not above me
-
-[01:10.490] I was just a lonely boy
-
-[01:14.006] Looking for someone to free me from this dark forever
-
-[01:23.498] And now it's always sun and summer together
-
-[01:30.038] Do you know how sexy you are
-
-[01:54.066] Do you know how hopeless I am
-
-[02:00.466] hope left me when I met you
-
-[02:06.862] 'Cause I don't need to wish or pretend
-
-[02:13.240] to find someone to help me get through
-
-[02:19.317] I was just a lonely boy
-
-[02:22.815] Looking for someone to free me from this dark forever
-
-[02:32.201] And now it's always sun and summer together
-
-[02:38.807] Do you know how sexy you are...
-
-[02:59.713] Do you know how sexy you are`
+      lrc: '/music/d.lrc'
     }
   ],
 //   MUSIC_PLAYER_METING: process.env.NEXT_PUBLIC_MUSIC_PLAYER_METING || false, // 是否要开启 MetingJS，从平台获取歌单。会覆盖自定义的 MUSIC_PLAYER_AUDIO_LIST，更多配置信息：https://github.com/metowolf/MetingJS
