@@ -9,7 +9,7 @@ import BLOG from './blog.config'
  */
 export const config = {
   // 这里设置白名单，防止静态资源被拦截
-  matcher: ['/((?!.*\\..*|_next|/sign-in|/auth).*)', '/', '/(api|trpc)(.*)']
+  matcher: ['/((?!.*\\..*|_next|/sign-in|/auth).*)', '/', '/(api|trpc)(.*)','/music/:path*']
 }
 
 // 限制登录访问的路由
@@ -27,14 +27,42 @@ const isTenantAdminRoute = createRouteMatcher([
 ])
 
 /**
- * 没有配置权限相关功能的返回
- * @param req
- * @param ev
- * @returns
+ * 音乐防盗链中间件（严格模式：空 Referer 也禁止）
  */
-// eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-const noAuthMiddleware = async (req: NextRequest, ev: any) => {
-  // 如果没有配置 Clerk 相关环境变量，返回一个默认响应或者继续处理请求
+function musicHotlinkProtection(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+
+  // 只对 /music 目录下的音频文件进行保护
+  if (pathname.startsWith('/music/') && 
+      /\.(m4a|lrc|avif|jpg|webp)$/i.test(pathname)) {
+    
+    const referer = req.headers.get('referer') || '';
+    const host = req.headers.get('host') || '';
+
+    // 严格模式：只有来自自己域名的 Referer 才允许
+    // 空 Referer（直接打开链接）也会被禁止
+    if (!referer || !referer.includes(host)) {
+      return new NextResponse('Hotlinking not allowed', {
+        status: 403,
+        headers: {
+          'Content-Type': 'text/plain',
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
+    }
+  }
+  return null; // 不拦截，继续往下执行
+}
+
+/**
+ * 没有配置权限相关功能的返回
+ */
+const noAuthMiddleware = async (req: NextRequest) => {
+  // 先执行音乐防盗链检查
+  const hotlinkResponse = musicHotlinkProtection(req);
+  if (hotlinkResponse) return hotlinkResponse;
+
+  // 原来的 redirect 逻辑
   if (BLOG['UUID_REDIRECT']) {
     let redirectJson: Record<string, string> = {}
     try {
@@ -45,33 +73,39 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
     } catch (err) {
       console.error('Error fetching static file:', err)
     }
+
     let lastPart = getLastPartOfUrl(req.nextUrl.pathname) as string
     if (checkStrIsNotionId(lastPart)) {
       lastPart = idToUuid(lastPart)
     }
+
     if (lastPart && redirectJson[lastPart]) {
       const redirectToUrl = req.nextUrl.clone()
       redirectToUrl.pathname = '/' + redirectJson[lastPart]
-      console.log(
-        `redirect from ${req.nextUrl.pathname} to ${redirectToUrl.pathname}`
-      )
+      console.log(`redirect from ${req.nextUrl.pathname} to ${redirectToUrl.pathname}`)
       return NextResponse.redirect(redirectToUrl, 308)
     }
   }
+
   return NextResponse.next()
 }
+
 /**
  * 鉴权中间件
  */
 const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
   ? clerkMiddleware((auth, req) => {
       const { userId } = auth()
+
+      // 先执行音乐防盗链检查
+      const hotlinkResponse = musicHotlinkProtection(req);
+      if (hotlinkResponse) return hotlinkResponse;
+
       // 处理 /dashboard 路由的登录保护
       if (isTenantRoute(req)) {
         if (!userId) {
-          // 用户未登录，重定向到 /sign-in
           const url = new URL('/sign-in', req.url)
-          url.searchParams.set('redirectTo', req.url) // 保存重定向目标
+          url.searchParams.set('redirectTo', req.url)
           return NextResponse.redirect(url)
         }
       }
@@ -86,7 +120,6 @@ const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
         })
       }
 
-      // 默认继续处理请求
       return NextResponse.next()
     })
   : noAuthMiddleware
