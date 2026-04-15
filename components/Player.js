@@ -50,6 +50,7 @@ const Player = () => {
         })
       )
     }
+  }
 
   useEffect(() => {
     initMusicPlayer()
@@ -97,5 +98,5 @@ const Player = () => {
   </div>
   )
 }
-}
+
 export default Player
