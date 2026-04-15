@@ -303,7 +303,7 @@ img {
 @media (max-width: 767px) {
     .aplayer {
         position: fixed !important;
-        bottom: 12px !important;
+        bottom: 16px !important;
         left: 8.5vw !important; 
         width: 80vw !important;
         z-index: 99999 !important;
