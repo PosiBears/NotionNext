@@ -1,95 +1,101 @@
 import { siteConfig } from '@/lib/config'
 import { loadExternalResource } from '@/lib/utils'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /**
- * QPlayer2 音乐播放器（稳定版）
+ * 音乐播放器
+ * @returns
  */
 const Player = () => {
+  const [player, setPlayer] = useState()
   const ref = useRef(null)
+  const lrcType = JSON.parse(siteConfig('MUSIC_PLAYER_LRC_TYPE'))
+  const playerVisible = JSON.parse(siteConfig('MUSIC_PLAYER_VISIBLE'))
+  const autoPlay = JSON.parse(siteConfig('MUSIC_PLAYER_AUTO_PLAY'))
+  const meting = JSON.parse(siteConfig('MUSIC_PLAYER_METING'))
+  const order = siteConfig('MUSIC_PLAYER_ORDER')
+  const audio = siteConfig('MUSIC_PLAYER_AUDIO_LIST')
 
   const musicPlayerEnable = siteConfig('MUSIC_PLAYER')
-  const playerVisible = JSON.parse(siteConfig('MUSIC_PLAYER_VISIBLE', 'true'))
+  const musicPlayerCDN = siteConfig('MUSIC_PLAYER_CDN_URL')
+  const musicMetingEnable = siteConfig('MUSIC_PLAYER_METING')
+  const musicMetingCDNUrl = siteConfig(
+    'MUSIC_PLAYER_METING_CDN_URL',
+    'https://cdnjs.cloudflare.com/ajax/libs/meting/2.0.1/Meting.min.js'
+  )
 
   const initMusicPlayer = async () => {
-    if (typeof window === 'undefined') return
-    if (!musicPlayerEnable) return
-    if (!ref.current) return
-
+    if (!musicPlayerEnable) {
+      return
+    }
     try {
-      // 1. 加载 jQuery
-      if (!window.jQuery) {
-        await loadExternalResource(
-          'https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js',
-          'js'
-        )
-      }
+      await loadExternalResource(musicPlayerCDN, 'js')
+    } catch (error) {
+      console.error('音乐组件异常', error)
+    }
 
-      // 2. 加载 QPlayer2（⚠️如果 CDN 失效，建议你本地化）
-      await loadExternalResource('/js/QPlayer.min.js', 'js')
+    if (musicMetingEnable) {
+      await loadExternalResource(musicMetingCDNUrl, 'js')
+    }
 
-      await loadExternalResource('/css/QPlayer.min.css', 'css')
-
-      // 3. 读取歌单（关键修复点）
-      let audio = siteConfig('MUSIC_PLAYER_AUDIO_LIST')
-
-      try {
-        if (typeof audio === 'string') {
-          audio = JSON.parse(audio)
-        }
-      } catch (e) {
-        console.error('歌单解析失败:', e)
-        audio = []
-      }
-
-      if (!Array.isArray(audio)) audio = []
-
-      // 4. 转换格式 + 过滤无效数据
-      const playlist = audio
-        .map(item => ({
-          title: item.name || item.title || '',
-          artist: item.artist || '',
-          src: item.url || item.src || '',
-          pic: item.cover || item.pic || '',
-          lrc: item.lrc || ''
-        }))
-        .filter(item => item.src)
-
-      console.log('QPlayer playlist:', playlist)
-
-      if (!playlist.length) {
-        console.warn('QPlayer2：歌单为空，已阻止初始化')
-        return
-      }
-
-      // 5. 初始化播放器
-      if (window.QPlayer) {
-        window.QPlayer.init({
-          selector: ref.current,
-          playlist
+    if (!meting && window.APlayer) {
+      setPlayer(
+        new window.APlayer({
+          container: ref.current,
+          fixed: false,
+          lrcType: lrcType,
+          autoplay: autoPlay,
+          order: order,
+          audio: audio
         })
-      }
-    } catch (err) {
-      console.error('QPlayer2 初始化失败:', err)
+      )
     }
   }
 
   useEffect(() => {
     initMusicPlayer()
+    return () => {
+      setPlayer(undefined)
+    }
   }, [])
 
   return (
     <div className={playerVisible ? 'visible' : 'invisible'}>
-      <div
-        ref={ref}
+      <link
+        rel='stylesheet'
+        type='text/css'
+        href='https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css'
+      />
+      {meting ? (
+        <meting-js
+          fixed='true'
+          type='playlist'
+          preload='auto'
+          api={siteConfig(
+            'MUSIC_PLAYER_METING_API',
+            'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r'
+          )}
+          autoplay={autoPlay}
+          order={siteConfig('MUSIC_PLAYER_ORDER')}
+          server={siteConfig('MUSIC_PLAYER_METING_SERVER')}
+          id={siteConfig('MUSIC_PLAYER_METING_ID')}
+        />
+      ) : (
+        <div 
+        ref={ref} 
+        data-player={player}
         style={{
           position: 'fixed',
           bottom: '20px',
           left: '20px',
-          zIndex: 99999
+          zIndex: 99999,
+          borderRadius: '16px',
+          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.25)',
+          overflow: 'hidden'
         }}
       />
-    </div>
+    )}
+  </div>
   )
 }
 
