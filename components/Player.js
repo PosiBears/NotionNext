@@ -26,10 +26,10 @@ const Player = () => {
       }
 
       // 加载 QPlayer2 JS
-      await loadExternalResource('/js/QPlayer2.min.js', 'js')
+      await loadExternalResource('/js/QPlayer.js', 'js')
 
       // 加载 QPlayer2 CSS
-      await loadExternalResource('/css/QPlayer2.min.css', 'css')
+      await loadExternalResource('/css/QPlayer.css', 'css')
 
       // 等待 DOM
       if (!ref.current) return
