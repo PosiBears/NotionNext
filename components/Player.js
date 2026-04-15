@@ -49,16 +49,19 @@ const Player = () => {
     theme: '#ff4d4f'
   });
 
-  // 添加隐藏按钮（安全版）
+  // 添加隐藏按钮（加强保护版）
   setTimeout(() => {
     const playerContainer = ref.current;
-    const playerEl = playerContainer?.querySelector('.aplayer');
+    if (!playerContainer) return;
 
-    if (!playerEl) return;                     // 防止找不到元素
-    if (playerEl.querySelector('.hide-btn')) return; // 防止重复添加
+    const playerEl = playerContainer.querySelector('.aplayer');
+    if (!playerEl) return;
+
+    // 防止重复添加按钮
+    if (playerEl.querySelector('.aplayer-hide-btn')) return;
 
     const hideBtn = document.createElement('div');
-    hideBtn.className = 'hide-btn';
+    hideBtn.className = 'aplayer-hide-btn';
     hideBtn.innerHTML = '✕';
     hideBtn.style.cssText = `
       position: absolute;
@@ -66,7 +69,7 @@ const Player = () => {
       right: 14px;
       width: 26px;
       height: 26px;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.75);
       color: #fff;
       border-radius: 50%;
       display: flex;
@@ -77,30 +80,27 @@ const Player = () => {
       cursor: pointer;
       z-index: 100;
       transition: all 0.2s;
-      user-select: none;
     `;
 
-    // 悬停效果
-    hideBtn.onmouseover = () => { hideBtn.style.background = 'rgba(220, 0, 0, 0.9)'; };
-    hideBtn.onmouseout = () => { hideBtn.style.background = 'rgba(0,0,0,0.7)'; };
+    hideBtn.onmouseover = () => hideBtn.style.background = 'rgba(200,0,0,0.9)';
+    hideBtn.onmouseout = () => hideBtn.style.background = 'rgba(0,0,0,0.75)';
 
-    // 点击隐藏（关键保护）
     hideBtn.onclick = (e) => {
       e.stopImmediatePropagation();
       playerEl.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
       playerEl.style.opacity = '0';
-      playerEl.style.transform = 'scale(0.9)';
+      playerEl.style.transform = 'scale(0.85)';
 
       setTimeout(() => {
         playerEl.style.display = 'none';
-      }, 400);
+      }, 420);
     };
 
     playerEl.style.position = 'relative';
     playerEl.appendChild(hideBtn);
 
-    console.log('✅ APlayer 隐藏按钮已添加'); // 调试用，部署后可删除
-  }, 1200); // 延迟1.2秒，确保播放器完全渲染
+    console.log('✅ 隐藏按钮已成功添加');
+  }, 1500); // 延迟更长，确保播放器完全渲染
 }
 
   useEffect(() => {
