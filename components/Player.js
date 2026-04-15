@@ -26,9 +26,9 @@ const Player = () => {
       }
 
       // 2. 加载 QPlayer2（⚠️如果 CDN 失效，建议你本地化）
-      await loadExternalResource('/js/QPlayer.js', 'js')
+      await loadExternalResource('/js/QPlayer.min.js', 'js')
 
-      await loadExternalResource('/css/QPlayer.css', 'css')
+      await loadExternalResource('/css/QPlayer.min.css', 'css')
 
       // 3. 读取歌单（关键修复点）
       let audio = siteConfig('MUSIC_PLAYER_AUDIO_LIST')
