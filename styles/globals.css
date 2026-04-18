@@ -303,9 +303,10 @@ img {
 @media (max-width: 767px) {
     .aplayer {
         position: fixed !important;
-        bottom: 16px !important;
+        bottom: 50% !important;
         left: 8.5vw !important; 
         width: 80vw !important;
+        transform: translateY(50%) !important;
         z-index: 99999 !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
