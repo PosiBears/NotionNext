@@ -366,4 +366,9 @@ display: none !important;
         overflow: hidden !important;
         background: rgba(255, 255, 255, 0.97) !important;
     }
+    .aplayer .aplayer-info,
+    .aplayer .aplayer-title,
+    .aplayer .aplayer-author {
+        text-align: center !important;
+    }
   }
