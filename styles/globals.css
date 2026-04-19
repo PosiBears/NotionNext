@@ -311,28 +311,43 @@ img {
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
         overflow: hidden !important;
         background: rgba(255, 255, 255, 0.97) !important;
-        padding-bottom: 4px !important;
     }
     
-    .aplayer .aplayer-controller {
-        padding-bottom: 4px !important;
-        margin-bottom: 0 !important;
-        height: auto !important;
-    }
-
-    .aplayer .aplayer-bar-wrap {
-        margin-bottom: 2px !important;
-        padding-bottom: 0 !important;
-    }
-
-    .aplayer .aplayer-time {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-    }
-
-    .aplayer .aplayer-btns {
-        margin-bottom: 0 !important;
+    .aplayer,
+    .aplayer * ,
+    .aplayer-controller,
+    .aplayer-bar-wrap,
+    .aplayer-bottom,
+    .aplayer-control,
+    .aplayer-panel,
+    .aplayer-time,
+    .aplayer-btns {
         padding-bottom: 2px !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* 更具体的层级轰炸 */
+    .aplayer .aplayer-controller,
+    .aplayer .aplayer-bar-wrap,
+    .aplayer .aplayer-bottom,
+    .aplayer .aplayer-time,
+    .aplayer .aplayer-btns {
+        padding: 0 10px 2px !important;
+        margin: 0 !important;
+        height: auto !important;
+        min-height: 38px !important;
+    }
+
+    /* 进度条区域 */
+    .aplayer .aplayer-bar-wrap {
+        padding-bottom: 0 !important;
+        margin-bottom: 1px !important;
+    }
+
+    /* 时间显示区域 */
+    .aplayer .aplayer-time {
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
     }
 
     .aplayer .aplayer-lrc {
