@@ -314,19 +314,25 @@ img {
         padding-bottom: 4px !important;
     }
     
-    .aplayer .aplayer-control {
-        padding-bottom: 2px !important;
+    .aplayer .aplayer-controller {
+        padding-bottom: 4px !important;
         margin-bottom: 0 !important;
+        height: auto !important;
     }
 
-    .aplayer .aplayer-bottom {
-        padding: 0 10px 4px !important;  
-        min-height: auto !important;
+    .aplayer .aplayer-bar-wrap {
+        margin-bottom: 2px !important;
+        padding-bottom: 0 !important;
     }
 
-    .aplayer .aplayer-time,
+    .aplayer .aplayer-time {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
     .aplayer .aplayer-btns {
         margin-bottom: 0 !important;
+        padding-bottom: 2px !important;
     }
 
     .aplayer .aplayer-lrc {
