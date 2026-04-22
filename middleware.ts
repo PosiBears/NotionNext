@@ -35,7 +35,7 @@ function musicHotlinkProtection(req: NextRequest) {
   // 只对 /music 目录下的音频文件进行保护
   if (
     (pathname.startsWith('/music/') || pathname.startsWith('/images/')) &&
-      /\.(m4a|lrc|avif|jpg|webp)$/i.test(pathname)) {
+      /\.(m4a|lrc|avif|jpg|webp|webm|mp4|ogg)$/i.test(pathname)) {
     
     const referer = req.headers.get('referer') || '';
     const host = req.headers.get('host') || '';
