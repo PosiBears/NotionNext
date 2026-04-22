@@ -39,7 +39,7 @@ module.exports = {
     {
       name: 'Do You Know How Sexy You Are',
       artist: 'Kendall Kelly',
-      url: '/music/d.webm',
+      url: '/music/d.m4a',
       cover: '/music/cover.avif',
       lrc: '/music/d.lrc'
     }
