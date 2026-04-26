@@ -352,11 +352,10 @@ module.exports = process.env.ANALYZE
   : nextConfig
 
 
-window.addEventListener("load", () => {
-    requestAnimationFrame(() => {
-        const el = document.querySelector(".aplayer");
-        if (!el) return;
-        el.style.opacity = "1";
-        el.style.visibility = "visible";
-    });
-});
+useEffect(() => {
+    const el = document.querySelector(".aplayer");
+    if (!el) return;
+
+    el.style.opacity = "1";
+    el.style.visibility = "visible";
+}, []);
