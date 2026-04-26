@@ -352,10 +352,20 @@ module.exports = process.env.ANALYZE
   : nextConfig
 
 
-useEffect(() => {
-    const el = document.querySelector(".aplayer");
-    if (!el) return;
+  
+"use client";
 
-    el.style.opacity = "1";
-    el.style.visibility = "visible";
-}, []);
+import { useEffect } from "react";
+
+export default function Player() {
+    useEffect(() => {
+        const el = document.querySelector(".aplayer");
+        if (!el) return;
+
+        requestAnimationFrame(() => {
+            el.classList.add("aplayer-ready");
+        });
+    }, []);
+
+    return <div className="aplayer" />;
+}
