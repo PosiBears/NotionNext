@@ -310,7 +310,7 @@ img {
         z-index: 99999 !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
-        overflow: visible !important;
+        overflow: hidden !important;
         background: rgba(255, 255, 255, 0.97) !important;
     }
 
@@ -320,7 +320,8 @@ img {
         text-align: center !important;
     }
 
-    .aplayer .aplayer-lrc {
+    .aplayer .aplayer-lrc,
+    .aplayer .aplayer-lrc * {
         font-size: 9px !important;   
         line-height: 1.2 !important;
     }
