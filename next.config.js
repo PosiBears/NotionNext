@@ -350,24 +350,3 @@ const nextConfig = {
 module.exports = process.env.ANALYZE
   ? withBundleAnalyzer(nextConfig)
   : nextConfig
-
-
-
-"use client";
-
-import { useEffect } from "react";
-
-export default function Player() {
-    useEffect(() => {
-        const el = document.querySelector(".aplayer");
-        if (!el) return;
-
-        requestAnimationFrame(() => {
-            el.classList.add("aplayer-ready");
-        });
-    }, []);
-
-    return (
-        <div className="aplayer" />
-    );
-}
