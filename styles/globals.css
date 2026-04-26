@@ -302,8 +302,6 @@ img {
 
 @media (max-width: 767px) {
     .aplayer {
-        opacity: 0 !important;
-        visibility: hidden !important;
         position: fixed !important;
         bottom: 16px !important;
         left: 50% !important; 
@@ -314,9 +312,6 @@ img {
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
         overflow: hidden !important;
         background: rgba(255, 255, 255, 0.97) !important;
-        -webkit-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        will-change: transform, opacity;
     }
 
     .aplayer .aplayer-lrc {
@@ -363,7 +358,7 @@ display: none !important;
         bottom: 25px !important;
         left: 25px !important;
         width: auto !important;
-        max-width: 460px !important;
+        max-width: 400px !important;
         min-width: 380px !important;
         z-index: 99999 !important; 
         border-radius: 16px !important;
