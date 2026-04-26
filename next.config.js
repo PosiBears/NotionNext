@@ -350,3 +350,13 @@ const nextConfig = {
 module.exports = process.env.ANALYZE
   ? withBundleAnalyzer(nextConfig)
   : nextConfig
+
+
+window.addEventListener("load", () => {
+    requestAnimationFrame(() => {
+        const el = document.querySelector(".aplayer");
+        if (!el) return;
+        el.style.opacity = "1";
+        el.style.visibility = "visible";
+    });
+});
