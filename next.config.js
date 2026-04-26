@@ -352,7 +352,7 @@ module.exports = process.env.ANALYZE
   : nextConfig
 
 
-  
+
 "use client";
 
 import { useEffect } from "react";
@@ -367,5 +367,7 @@ export default function Player() {
         });
     }, []);
 
-    return <div className="aplayer" />;
+    return (
+        <div className="aplayer" />
+    );
 }
