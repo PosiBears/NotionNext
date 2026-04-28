@@ -299,8 +299,11 @@ img {
   0% {background-position: right}
 }
 
+.notice {
+  white-space: pre-line;
+}
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
     .aplayer {
         position: fixed !important;
         bottom: 16px !important;
@@ -369,4 +372,4 @@ display: none !important;
     .aplayer .aplayer-author {
         text-align: center !important;
     }
-  }
+  } */
